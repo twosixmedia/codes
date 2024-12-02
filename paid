@@ -1,0 +1,18 @@
+<?php
+/**
+ * Change the email address for all admin related checkout emails in Paid Memberships Pro.
+ *
+ * You can add this recipe to your site by creating a custom plugin
+ * or using the Code Snippets plugin available for free in the WordPress repository.
+ * Read this companion article for step-by-step directions on either method.
+ * https://www.paidmembershipspro.com/create-a-plugin-for-pmpro-customizations/
+ */
+
+function my_pmpro_change_admin_to_email_for_checkout( $user_email, $email ) {
+	if ( strpos( $email->template, 'checkout_' ) !== false && strpos( $email->template, '_admin' ) !== false ) {
+		$user_email = 'pbs.admin@pbs.org.uk,members@pbs.org.uk'; // Set recipient email here.
+	}
+
+	return $user_email;
+}
+add_filter( 'pmpro_email_recipient', 'my_pmpro_change_admin_to_email_for_checkout', 10, 2 );
